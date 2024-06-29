@@ -122,28 +122,35 @@ const ActivityTable: React.FC<Props> = ({ data }) => {
   ];
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md">
-      {selectedRow && (
-        <UserDetailsModal
-          open={modalOpen}
-          handleClose={() => setModalOpen(false)}
-          row={selectedRow}
-        />
-      )}
-      <h3 className="text-lg font-semibold mb-4">Activity Details</h3>
-      <div style={{ height: 500, width: "100%" }}>
-        <DataGridPro
-          rows={rows}
-          columns={columns}
-          pageSizeOptions={[5, 10, 20]}
-          disableRowSelectionOnClick
-          pinnedColumns={{
-            left: ["name"],
-            right: ["userActivityDetails"],
-          }}
-        />
+    <>
+      <div className="bg-white p-4 rounded-lg mb-4">
+        {selectedRow && (
+          <UserDetailsModal
+            open={modalOpen}
+            handleClose={() => setModalOpen(false)}
+            row={selectedRow}
+          />
+        )}
+        <h3 className="text-lg font-semibold mb-4">
+          Overall Activity Details{" "}
+          <span className="text-gray-500 mb-4 text-xs">
+            (Click on the "i" icon to see details)
+          </span>
+        </h3>
+        <div style={{ height: 500, width: "100%" }}>
+          <DataGridPro
+            rows={rows}
+            columns={columns}
+            pageSizeOptions={[5, 10, 20]}
+            disableRowSelectionOnClick
+            pinnedColumns={{
+              left: ["name"],
+              right: ["userActivityDetails"],
+            }}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
