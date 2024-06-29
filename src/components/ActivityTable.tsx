@@ -17,7 +17,9 @@ const ActivityTable: React.FC<Props> = ({ data }) => {
       }, 0);
 
       const activityRate = (
-        totalActivities / row.dayWiseActivity.length
+        row?.dayWiseActivity?.length > 0
+          ? totalActivities / row.dayWiseActivity.length
+          : 0
       ).toFixed(2);
 
       const prOpen = +(
