@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import { DataResponse } from "../services/api";
 import { SelectChangeEvent } from "@mui/material";
 import CustomSelect from "./common/CustomSelect";
@@ -14,26 +14,6 @@ interface FilterBarProps {
 }
 
 const FilterBar: FC<FilterBarProps> = ({ filters, setFilters, data }) => {
-  const [minDate, setMinDate] = useState("");
-  const [maxDate, setMaxDate] = useState("");
-
-  useEffect(() => {
-    // Calculate min and max dates from the data
-    const allDates = data.data.AuthorWorklog.rows.flatMap((row) =>
-      row.dayWiseActivity.map((activity) => new Date(activity.date))
-    );
-
-    const minDate = new Date(
-      Math.min(...allDates.map((date) => date.getTime()))
-    );
-    const maxDate = new Date(
-      Math.max(...allDates.map((date) => date.getTime()))
-    );
-
-    setMinDate(minDate.toISOString().split("T")[0]);
-    setMaxDate(maxDate.toISOString().split("T")[0]);
-  }, [data]);
-
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilters({
       ...filters,
@@ -59,9 +39,8 @@ const FilterBar: FC<FilterBarProps> = ({ filters, setFilters, data }) => {
             type="date"
             name="start"
             value={filters.dateRange.start}
+            max={filters.dateRange.end}
             onChange={handleDateChange}
-            min={minDate}
-            max={maxDate}
             className="w-full p-2 border rounded"
           />
         </div>
@@ -71,9 +50,8 @@ const FilterBar: FC<FilterBarProps> = ({ filters, setFilters, data }) => {
             type="date"
             name="end"
             value={filters.dateRange.end}
+            min={filters.dateRange.start}
             onChange={handleDateChange}
-            min={minDate}
-            max={maxDate}
             className="w-full p-2 border rounded"
           />
         </div>
