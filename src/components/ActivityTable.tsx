@@ -58,17 +58,33 @@ const ActivityTable: React.FC<Props> = ({ data }) => {
   const [selectedRow, setSelectedRow] = useState<(typeof rows)[0] | null>(null);
 
   const columns: GridColDef[] = [
-    { field: "name", headerName: "Name", width: 225 },
-    { field: "prOpen", headerName: "PR Open", width: 110 },
-    { field: "prOpenPercentage", headerName: "PR Open %", width: 110 },
-    { field: "prMerged", headerName: "PR Merged", width: 110 },
-    { field: "prMergedPercentage", headerName: "PR Merged %", width: 110 },
-    { field: "commits", headerName: "Commits", width: 110 },
-    { field: "commitsPercentage", headerName: "Commits %", width: 110 },
+    { field: "name", headerName: "Name", width: 225, type: "string" },
+    { field: "prOpen", headerName: "PR Open", width: 110, type: "number" },
+    {
+      field: "prOpenPercentage",
+      headerName: "PR Open %",
+      width: 110,
+      type: "number",
+    },
+    { field: "prMerged", headerName: "PR Merged", width: 110, type: "number" },
+    {
+      field: "prMergedPercentage",
+      headerName: "PR Merged %",
+      width: 110,
+      type: "number",
+    },
+    { field: "commits", headerName: "Commits", width: 110, type: "number" },
+    {
+      field: "commitsPercentage",
+      headerName: "Commits %",
+      width: 110,
+      type: "number",
+    },
     {
       field: "totalActivities",
       headerName: "Total Activities",
       width: 150,
+      type: "number",
       renderCell: (params) => (
         <span className="font-bold text-blue-600">{params.value}</span>
       ),
@@ -77,6 +93,7 @@ const ActivityTable: React.FC<Props> = ({ data }) => {
       field: "activityRate",
       headerName: "Activity Rate per Day",
       width: 150,
+      type: "number",
       renderCell: (params) => (
         <span className="font-bold text-green-600">{params.value}</span>
       ),
@@ -85,6 +102,7 @@ const ActivityTable: React.FC<Props> = ({ data }) => {
       field: "userActivityDetails",
       headerName: "",
       width: 60,
+      type: "number",
       renderCell: (params) => {
         return (
           <div className="w-4 h-4 rounded-full">
