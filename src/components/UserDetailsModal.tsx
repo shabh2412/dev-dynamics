@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Modal,
-  Box,
-  Typography,
-  Grid,
-  Paper,
-  List,
-  ListItem,
-  ListItemText,
-} from "@mui/material";
+import { Modal, Box, Typography, Grid, Paper, List } from "@mui/material";
 
 interface UserDetailsModalProps {
   open: boolean;
@@ -98,7 +89,12 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
             </Grid>
             <Grid item xs={12} sm={6}>
               <Typography variant="subtitle1">
-                <strong>Activity Rate:</strong> {row.activityRate}
+                <strong>Total Days</strong> {row.dayWiseActivity.length}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Typography variant="subtitle1">
+                <strong>Activity Rate per Day:</strong> {row.activityRate}
               </Typography>
             </Grid>
           </Grid>
@@ -106,13 +102,18 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
         <Typography variant="h6" gutterBottom>
           Day-wise Activities
         </Typography>
-        <Paper elevation={3} sx={{ p: 2 }}>
+        <Paper elevation={3} sx={{ p: 2, mb: 2 }}>
           <List>
             {row.dayWiseActivity.map((day, index) => (
-              <ListItem key={index} divider>
-                <ListItemText
-                  primary={<strong>{day.date}</strong>}
-                  secondary={
+              <div
+                className="pb-4 mb-4 font-medium text-md text-gray-700 border-b"
+                key={index}
+              >
+                <div>
+                  <p className="mb-2">
+                    <strong>{day.date}</strong>
+                  </p>
+                  <div>
                     <Grid container spacing={1}>
                       {day.items.children.map((activity, idx) => (
                         <Grid item xs={12} sm={6} key={idx}>
@@ -122,9 +123,9 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
                         </Grid>
                       ))}
                     </Grid>
-                  }
-                />
-              </ListItem>
+                  </div>
+                </div>
+              </div>
             ))}
           </List>
         </Paper>
