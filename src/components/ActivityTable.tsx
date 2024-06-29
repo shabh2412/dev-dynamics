@@ -73,7 +73,7 @@ const ActivityTable: React.FC<Props> = ({ data }) => {
     },
     {
       field: "activityRate",
-      headerName: "Activity Rate",
+      headerName: "Activity Rate per Day",
       width: 150,
       renderCell: (params) => (
         <span className="font-bold text-green-600">{params.value}</span>

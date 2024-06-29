@@ -98,7 +98,12 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
             </Grid>
             <Grid item xs={12} sm={6}>
               <Typography variant="subtitle1">
-                <strong>Activity Rate:</strong> {row.activityRate}
+                <strong>Total Days</strong> {row.dayWiseActivity.length}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Typography variant="subtitle1">
+                <strong>Activity Rate per Day:</strong> {row.activityRate}
               </Typography>
             </Grid>
           </Grid>
